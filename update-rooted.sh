@@ -984,11 +984,13 @@ checkVPNcertificates() {
 	NEEDVPNUPDATE=false
 	
 	echo ">>> Creating backup folder and creating backups..."
-    mkdir -p /root/oldvpn
+        mkdir -p /root/oldvpn
 	cp /etc/openvpn/vpn.conf /root/oldvpn/vpn.conf
-	
+
+if grep -q nxt /etc/opkg/arch.conf
+then
 	echo "Check vpn.conf"
-    cp /etc/openvpn/vpn.conf /tmp/vpn.conf
+        cp /etc/openvpn/vpn.conf /tmp/vpn.conf
 	if grep -q tap0 /tmp/vpn.conf 
 		then
 			echo "vpn.conf is not empty"
@@ -1023,7 +1025,8 @@ EOT
 			cp /tmp/vpn.conf /etc/openvpn/vpn.conf
 			echo "New vpn.conf with hostname: $REALHOSTNAME2 created"
 	fi
-	
+fi
+
 	if grep -q nxt /etc/opkg/arch.conf	
 	then
 		if openssl x509 -in /etc/openvpn/certs/device.crt -noout -issuer | grep -q "Prodrive"
