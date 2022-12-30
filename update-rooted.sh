@@ -987,7 +987,7 @@ checkVPNcertificates() {
         mkdir -p /root/oldvpn
 	cp /etc/openvpn/vpn.conf /root/oldvpn/vpn.conf
 
-if grep -q nxt /etc/opkg/arch.conf
+if grep -q qb2 /etc/opkg/arch.conf
 then
 	echo "Check vpn.conf"
         cp /etc/openvpn/vpn.conf /tmp/vpn.conf
